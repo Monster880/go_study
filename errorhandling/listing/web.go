@@ -7,7 +7,11 @@ import (
 
 func worker(id int, c chan int){
 	for{
-		fmt.Printf("Worker %d received %d\n", id, <-c)
+		n, ok := <-c
+		if !ok {
+			break
+		}
+		fmt.Printf("Worker %d received %d\n", id, n)
 	}
 }
 
