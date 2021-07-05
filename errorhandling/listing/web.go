@@ -6,11 +6,7 @@ import (
 )
 
 func worker(id int, c chan int){
-	for{
-		n, ok := <-c
-		if !ok {
-			break
-		}
+	for n := range c{
 		fmt.Printf("Worker %d received %d\n", id, n)
 	}
 }
@@ -59,7 +55,10 @@ func channelClose(){
 }
 
 func main() {
-	// chanDemo()
-	//bufferChannel()
+	fmt.Println("Channel as first-class citizen")
+	chanDemo()
+	fmt.Println("Buffer channel")
+	bufferChannel()
+	fmt.Println("Channel close and range")
 	channelClose()
 }
